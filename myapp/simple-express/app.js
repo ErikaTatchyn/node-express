@@ -3,9 +3,14 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const morgan = require("morgan");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+
+require("dotenv").config();
+process.env.SECRET_KEY;
+process.env.NODE_ENV;
 
 const app = express();
 
@@ -37,5 +42,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+
+app.use(logger("dev"));
 
 module.exports = app;
